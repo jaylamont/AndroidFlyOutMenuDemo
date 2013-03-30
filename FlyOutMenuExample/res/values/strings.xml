@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FlyOutMenuExample</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut nisi a ligula porta fringilla eget vitae tellus. Mauris at nisi sed nisi dictum commodo. Fusce mauris purus, aliquet sit amet suscipit eget, scelerisque quis quam. Proin vulputate, lectus eu molestie accumsan, nunc nunc ornare metus, eu tristique eros sem quis nunc. Nam vitae lorem mi. Nulla vitae tempor dolor. Nulla convallis nisl a mi porttitor a tempor tortor aliquet.</string>
+
+</resources>
