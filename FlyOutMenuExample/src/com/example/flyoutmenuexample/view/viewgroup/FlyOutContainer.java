@@ -9,8 +9,8 @@ import android.widget.LinearLayout;
 public class FlyOutContainer extends LinearLayout {
 
 	// References to groups contained in this view.
-	private View menuVG;
-	private View contentVG;
+	private View menu;
+	private View content;
 
 	// Constants
 	protected static final int menuMargin = 150;
@@ -39,8 +39,10 @@ public class FlyOutContainer extends LinearLayout {
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
 
-		this.menuVG = this.getChildAt(0);
-		this.contentVG = this.getChildAt(1);
+		this.menu = this.getChildAt(0);
+		this.content = this.getChildAt(1);
+
+		this.menu.setVisibility(View.GONE);
 	}
 
 	@Override
@@ -49,30 +51,26 @@ public class FlyOutContainer extends LinearLayout {
 		if (changed)
 			this.calculateChildDimensions();
 
-		this.menuVG.layout(left, top, left + getMenuWidth(), bottom);
+		this.menu.layout(left, top, right - menuMargin, bottom);
 
-		switch (this.menuCurrentState) {
-		case CLOSED:
-			this.contentVG.layout(left, top, right, bottom);
-			break;
-		case OPEN:
-			this.contentVG.layout(left + this.currentContentOffset, top, right
-					+ this.currentContentOffset, bottom);
-			break;
-		}
+		this.content.layout(left + this.currentContentOffset, top, right
+				+ this.currentContentOffset, bottom);
+
 	}
 
 	public void toggleMenu() {
 		switch (this.menuCurrentState) {
 		case CLOSED:
+			this.menu.setVisibility(View.VISIBLE);
 			this.currentContentOffset = this.getMenuWidth();
-			this.contentVG.offsetLeftAndRight(currentContentOffset);
+			this.content.offsetLeftAndRight(currentContentOffset);
 			this.menuCurrentState = MenuState.OPEN;
 			break;
 		case OPEN:
-			this.contentVG.offsetLeftAndRight(-currentContentOffset);
+			this.content.offsetLeftAndRight(-currentContentOffset);
 			this.currentContentOffset = 0;
 			this.menuCurrentState = MenuState.CLOSED;
+			this.menu.setVisibility(View.GONE);
 			break;
 		}
 
@@ -80,15 +78,15 @@ public class FlyOutContainer extends LinearLayout {
 	}
 
 	private int getMenuWidth() {
-		return this.menuVG.getLayoutParams().width;
+		return this.menu.getLayoutParams().width;
 	}
 
 	private void calculateChildDimensions() {
-		this.contentVG.getLayoutParams().height = this.getHeight();
-		this.contentVG.getLayoutParams().width = this.getWidth();
+		this.content.getLayoutParams().height = this.getHeight();
+		this.content.getLayoutParams().width = this.getWidth();
 
-		this.menuVG.getLayoutParams().width = this.getWidth() - menuMargin;
-		this.menuVG.getLayoutParams().height = this.getHeight();
+		this.menu.getLayoutParams().width = this.getWidth() - menuMargin;
+		this.menu.getLayoutParams().height = this.getHeight();
 	}
 
 }
