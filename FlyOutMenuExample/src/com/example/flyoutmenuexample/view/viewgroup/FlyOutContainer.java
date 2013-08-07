@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import com.example.flyoutmenuexample.SampleActivity;
 
 public class FlyOutContainer extends LinearLayout {
 
@@ -13,7 +14,8 @@ public class FlyOutContainer extends LinearLayout {
 	private View content;
 
 	// Constants
-	protected static final int menuMargin = 150;
+	// The margin is now set to only display 1/4 of the screen. No matter the size.
+	protected static final int menuMargin = (SampleActivity.outWidth/4);
 
 	public enum MenuState {
 		CLOSED, OPEN
